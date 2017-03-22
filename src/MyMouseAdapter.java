@@ -10,8 +10,39 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MyMouseAdapter extends MouseAdapter {
+	
 	private Random generator = new Random();	
 
+	public int minesNear(MyPanel myPanel){
+		int mines=0;
+		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		System.out.println(mines);
+		return mines;
+	}
+	
 	public void mousePressed(MouseEvent e) {
 
 		switch (e.getButton()) {
@@ -108,9 +139,37 @@ public class MyMouseAdapter extends MouseAdapter {
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
 							else {
-								
-								newColor = Color.WHITE; 
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+								int mines = minesNear(myPanel);
+								newColor = Color.WHITE;
+										JLabel label1= new JLabel();
+										label1.setBounds(51+30*gridX, 41+30*gridY, 29, 29);
+										switch (mines){
+										case 0:
+											//NOTHING
+											break;
+										case 1:
+											label1.setText("  "+mines);
+											label1.setForeground(Color.BLUE);
+											break;
+										case 2:
+											label1.setText("  "+mines);
+											label1.setForeground(Color.GREEN);
+											break;
+										case 3:
+											label1.setText("  "+mines);
+											label1.setForeground(Color.ORANGE);
+											break;
+										default:
+											label1.setText("  "+mines);
+											label1.setForeground(Color.RED);
+
+										}
+										myPanel.add(label1);
+										myPanel.repaint();
+										myFrame.add(myPanel);
+										myFrame.repaint();
+										System.out.println(mines);
+										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
 						}
 					}
