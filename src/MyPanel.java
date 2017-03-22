@@ -18,6 +18,8 @@ public class MyPanel extends JPanel {
 	public int mouseDownGridX = 0;
 	public int mouseDownGridY = 0;
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
+	public Color[][] blockMines = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
+	public int mines = 10;
 	
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
@@ -35,7 +37,28 @@ public class MyPanel extends JPanel {
 				colorArray[x][y] = Color.GRAY;
 			}
 		}
+		setMines();
 	}
+	
+	public void setMines(){
+		Random number = new Random();
+		int minesPlaced = 0;
+		
+		while(minesPlaced <= mines ){
+			int xCor = number.nextInt(TOTAL_COLUMNS);
+			int yCor = number.nextInt(TOTAL_ROWS);
+			blockMines[xCor][yCor] = Color.BLACK;
+			minesPlaced++;
+		}
+		for(int x = 0; x < TOTAL_COLUMNS; x++){
+			for(int y = 0; y < TOTAL_ROWS; y++){
+				if(blockMines[x][y] != Color.BLACK){
+					blockMines[x][y] = Color.GRAY;
+				}
+			}
+		}
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -71,6 +94,7 @@ public class MyPanel extends JPanel {
 			}
 		}
 	}
+	
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
