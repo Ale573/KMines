@@ -15,29 +15,152 @@ public class MyMouseAdapter extends MouseAdapter {
 
 	public int minesNear(MyPanel myPanel){
 		int mines=0;
-		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8) {
+
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-			mines += 1;
+		else if (myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY == 0){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY == 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridY == 0 && myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridY == 0 && myPanel.mouseDownGridX == 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridX == 8 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
-		if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-			mines += 1;
+		if(myPanel.mouseDownGridY == 8 && myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+		}
+		if(myPanel.mouseDownGridX == 8 && myPanel.mouseDownGridY == 8){
+			
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+				mines += 1;
+			}
+			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+				mines += 1;
+			}
 		}
 		System.out.println(mines);
 		return mines;
@@ -138,7 +261,8 @@ public class MyMouseAdapter extends MouseAdapter {
 								newColor = Color.BLACK; 
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
-							else {
+							else {		
+								
 								int mines = minesNear(myPanel);
 								newColor = Color.WHITE;
 										JLabel label1= new JLabel();
