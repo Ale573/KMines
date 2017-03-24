@@ -53,7 +53,7 @@ public class MyPanel extends JPanel {
 		for(int x = 0; x < TOTAL_COLUMNS; x++){
 			for(int y = 0; y < TOTAL_ROWS; y++){
 				if(blockMines[x][y] != Color.BLACK){
-					blockMines[x][y] = Color.GRAY;
+					blockMines[x][y] = Color.WHITE;
 				}
 			}
 		}

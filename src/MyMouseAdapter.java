@@ -11,157 +11,49 @@ import javax.swing.JLabel;
 
 public class MyMouseAdapter extends MouseAdapter {
 	
-	private Random generator = new Random();	
+	private Random generator = new Random();
+	
+	//TODO: Verificar porque da error al correrlo y el porque no sigue pintando los otros grids
+	public void uncoverSquares(MyPanel myPanel, int mines, int x, int y){
+		if (mines == 0){
+			if(myPanel.blockMines[x][y].equals(Color.WHITE)){
+				myPanel.colorArray[x][y] = Color.WHITE;
+				uncoverSquares(myPanel, mines, x + 1, y);
+				uncoverSquares(myPanel, mines, x - 1, y);
+				uncoverSquares(myPanel, mines, x, y - 1);
+				uncoverSquares(myPanel, mines, x, y + 1);
+			}
+		}
 
+	}
 	public int minesNear(MyPanel myPanel){
 		int mines=0;
-		if(myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8) {
-
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+		int x = myPanel.mouseDownGridX;
+		int y = myPanel.mouseDownGridY;			
+			if(x!=0 && myPanel.blockMines[x - 1][y].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+			if(x!=8 && myPanel.blockMines[x + 1][y].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			if(y!=0 && myPanel.blockMines[x][y - 1].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+			if(y!=8 && myPanel.blockMines[x][y + 1].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			if(x!=0 && y!=8 && myPanel.blockMines[x - 1][y + 1].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
+			if(x!=8 && y!=8 && myPanel.blockMines[x + 1][y + 1].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
+			if(x!=0 && y!=0 && myPanel.blockMines[x - 1][y - 1].equals(Color.BLACK)){
 				mines += 1;
 			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
+			if(x!=8 && y!=0 && myPanel.blockMines[x + 1][y - 1].equals(Color.BLACK)){
 				mines += 1;
-			}
-		}
-		else if (myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY == 0){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridX == 0 && myPanel.mouseDownGridY == 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridY == 0 && myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridY == 0 && myPanel.mouseDownGridX == 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridX == 8 && myPanel.mouseDownGridY > 0 && myPanel.mouseDownGridY < 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridY == 8 && myPanel.mouseDownGridX > 0 && myPanel.mouseDownGridX < 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX + 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
-		if(myPanel.mouseDownGridX == 8 && myPanel.mouseDownGridY == 8){
-			
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX - 1][myPanel.mouseDownGridY].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-		}
+			}	
 		System.out.println(mines);
 		return mines;
 	}
@@ -261,39 +153,38 @@ public class MyMouseAdapter extends MouseAdapter {
 								newColor = Color.BLACK; 
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
-							else {		
-								
+							else {
+								JLabel label1= new JLabel();
+								//sets label to square touched
 								int mines = minesNear(myPanel);
-								newColor = Color.WHITE;
-										JLabel label1= new JLabel();
-										label1.setBounds(51+30*gridX, 41+30*gridY, 29, 29);
-										switch (mines){
-										case 0:
-											//NOTHING
-											break;
-										case 1:
-											label1.setText("  "+mines);
-											label1.setForeground(Color.BLUE);
-											break;
-										case 2:
-											label1.setText("  "+mines);
-											label1.setForeground(Color.GREEN);
-											break;
-										case 3:
-											label1.setText("  "+mines);
-											label1.setForeground(Color.ORANGE);
-											break;
-										default:
-											label1.setText("  "+mines);
-											label1.setForeground(Color.RED);
-
-										}
-										myPanel.add(label1);
-										myPanel.repaint();
-										myFrame.add(myPanel);
-										myFrame.repaint();
-										System.out.println(mines);
-										myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+								newColor=Color.WHITE;
+								label1.setBounds(51+30*gridX, 41+30*gridY, 29, 29);
+								switch (mines){
+								case 0:
+									label1.setForeground(newColor);
+									break;
+								case 1:
+									label1.setForeground(Color.BLUE);
+									break;
+								case 2:
+									label1.setForeground(Color.GREEN);
+									break;
+								case 3:
+									label1.setForeground(Color.ORANGE);
+									break;
+								default:
+									label1.setForeground(Color.RED);
+								}
+								label1.setText("  "+mines);
+								myPanel.add(label1);
+								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+								myPanel.repaint();
+								myPanel.add(label1);
+								myPanel.repaint();
+								myFrame.add(myPanel);
+								myFrame.repaint();
+								System.out.println(mines);
+								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
 						}
 					}
