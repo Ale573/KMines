@@ -10,54 +10,94 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MyMouseAdapter extends MouseAdapter {
-	
+
 	private Random generator = new Random();
-	
-	//TODO: Verificar porque da error al correrlo y el porque no sigue pintando los otros grids
-	public void uncoverSquares(MyPanel myPanel, int mines, int x, int y){
-		if (mines == 0){
-			if(myPanel.blockMines[x][y].equals(Color.WHITE)){
-				myPanel.colorArray[x][y] = Color.WHITE;
-				uncoverSquares(myPanel, mines, x + 1, y);
-				uncoverSquares(myPanel, mines, x - 1, y);
-				uncoverSquares(myPanel, mines, x, y - 1);
-				uncoverSquares(myPanel, mines, x, y + 1);
-			}
+
+	public void paintNumbers(MyPanel myPanel, JFrame myFrame, int x, int y, int mines){
+		JLabel label1= new JLabel();
+		//sets label to square touched
+
+		label1.setBounds(51+30*x, 41+30*y, 29, 29);
+
+		switch (mines){
+		case 0:
+			break;
+		case 1:
+			label1.setForeground(Color.BLUE);
+			break;
+		case 2:
+			label1.setForeground(Color.GREEN);
+			break;
+		case 3:
+			label1.setForeground(Color.ORANGE);
+			break;
+		default:
+			label1.setForeground(Color.RED);
 		}
 
+		label1.setText("  "+mines);
+		myPanel.add(label1);
+		myPanel.repaint();
+		myFrame.add(myPanel);
+		myFrame.repaint();
+		System.out.println(mines);
 	}
-	public int minesNear(MyPanel myPanel){
-		int mines=0;
-		int x = myPanel.mouseDownGridX;
-		int y = myPanel.mouseDownGridY;			
-			if(x!=0 && myPanel.blockMines[x - 1][y].equals(Color.BLACK)){
-				mines += 1;
+
+	//TODO: Verificar porque da error al correrlo y el porque no sigue pintando los otros grids
+	public void uncoverSquares(MyPanel myPanel, JFrame myFrame, int x, int y) {
+		if(x >= 0 && x <= 8 && y >= 0 && y <= 8){
+
+			if(!(myPanel.colorArray[x][y].equals(Color.RED)) && !(myPanel.blockMines[x][y].equals(Color.BLACK)) && !(myPanel.colorArray[x][y].equals(Color.WHITE))) {
+				if(minesNear(myPanel, x, y) == 0){
+					myPanel.colorArray[x][y] = Color.WHITE;
+					uncoverSquares(myPanel, myFrame, x - 1, y);
+					uncoverSquares(myPanel, myFrame, x + 1, y);
+					uncoverSquares(myPanel, myFrame, x, y - 1);
+					uncoverSquares(myPanel, myFrame, x, y + 1);
+					uncoverSquares(myPanel, myFrame, x - 1, y + 1);
+					uncoverSquares(myPanel, myFrame, x + 1, y + 1);
+					uncoverSquares(myPanel, myFrame, x - 1, y - 1);
+					uncoverSquares(myPanel, myFrame, x + 1, y - 1);
+				}
+				
+				else {
+					myPanel.colorArray[x][y] = Color.WHITE;
+					paintNumbers(myPanel, myFrame, x, y, minesNear(myPanel, x, y));
+				}
 			}
-			if(x!=8 && myPanel.blockMines[x + 1][y].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(y!=0 && myPanel.blockMines[x][y - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(y!=8 && myPanel.blockMines[x][y + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(x!=0 && y!=8 && myPanel.blockMines[x - 1][y + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(x!=8 && y!=8 && myPanel.blockMines[x + 1][y + 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(x!=0 && y!=0 && myPanel.blockMines[x - 1][y - 1].equals(Color.BLACK)){
-				mines += 1;
-			}
-			if(x!=8 && y!=0 && myPanel.blockMines[x + 1][y - 1].equals(Color.BLACK)){
-				mines += 1;
-			}	
+		}
+	}
+
+	public int minesNear(MyPanel myPanel, int x, int y){
+		int mines=0;			
+		if(x!=0 && myPanel.blockMines[x - 1][y].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(x!=8 && myPanel.blockMines[x + 1][y].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(y!=0 && myPanel.blockMines[x][y - 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(y!=8 && myPanel.blockMines[x][y + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(x!=0 && y!=8 && myPanel.blockMines[x - 1][y + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(x!=8 && y!=8 && myPanel.blockMines[x + 1][y + 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(x!=0 && y!=0 && myPanel.blockMines[x - 1][y - 1].equals(Color.BLACK)){
+			mines += 1;
+		}
+		if(x!=8 && y!=0 && myPanel.blockMines[x + 1][y - 1].equals(Color.BLACK)){
+			mines += 1;
+		}	
 		System.out.println(mines);
 		return mines;
 	}
-	
+
 	public void mousePressed(MouseEvent e) {
 
 		switch (e.getButton()) {
@@ -149,42 +189,12 @@ public class MyMouseAdapter extends MouseAdapter {
 						//On the grid other than on the left column and on the top row:
 						if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.GRAY)){
 							if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.BLACK)){
-								
+
 								newColor = Color.BLACK; 
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							}
 							else {
-								JLabel label1= new JLabel();
-								//sets label to square touched
-								int mines = minesNear(myPanel);
-								newColor=Color.WHITE;
-								label1.setBounds(51+30*gridX, 41+30*gridY, 29, 29);
-								switch (mines){
-								case 0:
-									label1.setForeground(newColor);
-									break;
-								case 1:
-									label1.setForeground(Color.BLUE);
-									break;
-								case 2:
-									label1.setForeground(Color.GREEN);
-									break;
-								case 3:
-									label1.setForeground(Color.ORANGE);
-									break;
-								default:
-									label1.setForeground(Color.RED);
-								}
-								label1.setText("  "+mines);
-								myPanel.add(label1);
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
-								myPanel.repaint();
-								myPanel.add(label1);
-								myPanel.repaint();
-								myFrame.add(myPanel);
-								myFrame.repaint();
-								System.out.println(mines);
-								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
+								uncoverSquares(myPanel, myFrame, myPanel.mouseDownGridX, myPanel.mouseDownGridY);
 							}
 						}
 					}
