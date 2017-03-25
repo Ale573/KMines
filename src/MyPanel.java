@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
@@ -20,7 +19,7 @@ public class MyPanel extends JPanel {
 	public Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public Color[][] blockMines = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public int mines = 10;
-	
+
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("INNER_CELL_SIZE must be positive!");
@@ -39,26 +38,28 @@ public class MyPanel extends JPanel {
 		}
 		setMines();
 	}
-	
+
 	public void setMines(){
 		Random number = new Random();
 		int minesPlaced = 0;
-		
-		while(minesPlaced <= mines ){
-			int xCor = number.nextInt(TOTAL_COLUMNS);
-			int yCor = number.nextInt(TOTAL_ROWS);
-			blockMines[xCor][yCor] = Color.BLACK;
-			minesPlaced++;
-		}
+
 		for(int x = 0; x < TOTAL_COLUMNS; x++){
 			for(int y = 0; y < TOTAL_ROWS; y++){
-				if(blockMines[x][y] != Color.BLACK){
-					blockMines[x][y] = Color.WHITE;
-				}
+				blockMines[x][y] = Color.WHITE;
+			}
+		}
+
+		while(minesPlaced < mines){
+			int xCor = number.nextInt(TOTAL_COLUMNS);
+			int yCor = number.nextInt(TOTAL_ROWS);
+
+			if(blockMines[xCor][yCor] != Color.BLACK){
+				blockMines[xCor][yCor] = Color.BLACK;
+				minesPlaced++;
 			}
 		}
 	}
-	
+
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
@@ -88,13 +89,13 @@ public class MyPanel extends JPanel {
 		//Paint cell colors
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
-					Color c = colorArray[x][y];
-					g.setColor(c);
-					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+				Color c = colorArray[x][y];
+				g.setColor(c);
+				g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
 			}
 		}
 	}
-	
+
 	public int getGridX(int x, int y) {
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;

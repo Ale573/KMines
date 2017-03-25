@@ -3,15 +3,10 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
-
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class MyMouseAdapter extends MouseAdapter {
-
-	private Random generator = new Random();
 
 	public void paintNumbers(MyPanel myPanel, JFrame myFrame, int x, int y, int mines){
 		JLabel label1= new JLabel();
@@ -43,7 +38,6 @@ public class MyMouseAdapter extends MouseAdapter {
 		System.out.println(mines);
 	}
 
-	//TODO: Verificar porque da error al correrlo y el porque no sigue pintando los otros grids
 	public void uncoverSquares(MyPanel myPanel, JFrame myFrame, int x, int y) {
 		if(x >= 0 && x <= 8 && y >= 0 && y <= 8){
 
