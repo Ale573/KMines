@@ -6,6 +6,8 @@ import java.util.Random;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
+	public int minesPlaced = 0;
+	
 	private static final long serialVersionUID = 3426940946811133635L;
 	private static final int GRID_X = 50;
 	private static final int GRID_Y = 40;
@@ -41,7 +43,6 @@ public class MyPanel extends JPanel {
 
 	public void setMines(){
 		Random number = new Random();
-		int minesPlaced = 0;
 
 		for(int x = 0; x < TOTAL_COLUMNS; x++){
 			for(int y = 0; y < TOTAL_ROWS; y++){
