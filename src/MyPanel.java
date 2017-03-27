@@ -3,7 +3,6 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {

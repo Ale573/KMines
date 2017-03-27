@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JButton;
 
 public class MyMouseAdapter extends MouseAdapter {
 	int redSquares=0;
@@ -41,7 +40,6 @@ public class MyMouseAdapter extends MouseAdapter {
 		System.out.println(mines);
 	}
 
-	//TODO: Verificar porque da error al correrlo y el porque no sigue pintando los otros grids
 	public void uncoverSquares(MyPanel myPanel, JFrame myFrame, int x, int y) {
 		if(x >= 0 && x <= 8 && y >= 0 && y <= 8){
 
