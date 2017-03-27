@@ -68,6 +68,20 @@ public class MyMouseAdapter extends MouseAdapter {
 			}
 			System.out.println("White squares " + whiteSquares);
 			if(whiteSquares == 71){
+				for(int i=0; i<=8; i++){
+					for(int j=0; j<=8; j++){
+						if(myPanel.blockMines[i][j].equals(Color.BLACK)){
+							myPanel.colorArray[i][j]=Color.BLACK;
+						}
+						else if(myPanel.blockMines[i][j].equals(Color.WHITE)){
+							myPanel.colorArray[i][j]=Color.WHITE;
+							//TODO
+							paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
+						}
+					}
+				}
+
+
 				won.setForeground(Color.GREEN);
 				won.setBackground(Color.GRAY);
 				won.setOpaque(true);
@@ -215,14 +229,13 @@ public class MyMouseAdapter extends MouseAdapter {
 								for(int i=0; i<=8; i++){
 									for(int j=0; j<=8; j++){
 										if(myPanel.blockMines[i][j].equals(Color.WHITE)){
-											//TODO
 											myPanel.colorArray[i][j]=Color.WHITE;
 											paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
 										}
 										if(myPanel.blockMines[i][j].equals(Color.BLACK)){
 											myPanel.colorArray[i][j]=newColor;
 										}
-										
+
 									}
 								}
 							}
@@ -296,8 +309,17 @@ public class MyMouseAdapter extends MouseAdapter {
 							won.setSize(100, 50);
 							myPanel.add(won);
 							myPanel.repaint();
-
+							for(int i=0; i<=8; i++){
+								for(int j=0; j<=8; j++){
+									if(myPanel.blockMines[i][j].equals(Color.WHITE)){
+										myPanel.colorArray[i][j]=Color.WHITE;
+										//TODO
+										paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
+									}
+								}
+							}
 						}
+
 					}
 				}
 			}
