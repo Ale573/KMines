@@ -48,6 +48,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			if(!(myPanel.colorArray[x][y].equals(Color.RED)) && !(myPanel.blockMines[x][y].equals(Color.BLACK)) && !(myPanel.colorArray[x][y].equals(Color.WHITE))) {
 				if(minesNear(myPanel, x, y) == 0){
 					myPanel.colorArray[x][y] = Color.WHITE;
+					whiteSquares += 1;
 					uncoverSquares(myPanel, myFrame, x - 1, y);
 					uncoverSquares(myPanel, myFrame, x + 1, y);
 					uncoverSquares(myPanel, myFrame, x, y - 1);
@@ -60,9 +61,11 @@ public class MyMouseAdapter extends MouseAdapter {
 
 				else {
 					myPanel.colorArray[x][y] = Color.WHITE;
+					whiteSquares += 1;
 					paintNumbers(myPanel, myFrame, x, y, minesNear(myPanel, x, y));
 				}
 			}
+			System.out.println("White squares " + whiteSquares);
 			if(whiteSquares == 71){
 				won.setForeground(Color.GREEN);
 				won.setBackground(Color.GRAY);
