@@ -9,7 +9,9 @@ import javax.swing.JLabel;
 
 public class MyMouseAdapter extends MouseAdapter {
 	int redSquares=0;
-	
+	int whiteSquares = 0;
+	JLabel won = new JLabel("YOU WON!", JLabel.CENTER);
+
 	public void paintNumbers(MyPanel myPanel, JFrame myFrame, int x, int y, int mines){
 		JLabel label1= new JLabel();
 		//sets label to square touched
@@ -55,11 +57,19 @@ public class MyMouseAdapter extends MouseAdapter {
 					uncoverSquares(myPanel, myFrame, x - 1, y - 1);
 					uncoverSquares(myPanel, myFrame, x + 1, y - 1);
 				}
-				
+
 				else {
 					myPanel.colorArray[x][y] = Color.WHITE;
 					paintNumbers(myPanel, myFrame, x, y, minesNear(myPanel, x, y));
 				}
+			}
+			if(whiteSquares == 71){
+				won.setForeground(Color.GREEN);
+				won.setBackground(Color.GRAY);
+				won.setOpaque(true);
+				won.setSize(100, 50);
+				myPanel.add(won);
+				myPanel.repaint();
 			}
 		}
 	}
@@ -176,7 +186,7 @@ public class MyMouseAdapter extends MouseAdapter {
 				if ((gridX == -1) || (gridY == -1)) {
 					//Is releasing outside
 					//Do nothing
-					
+
 				} else {
 					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
 						//Released the mouse button on a different cell where it was pressed
@@ -186,25 +196,25 @@ public class MyMouseAdapter extends MouseAdapter {
 						//On the grid other than on the left column and on the top row:
 						if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.GRAY)){
 							if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.BLACK)){
-								
+
 								newColor = Color.BLACK; 
 								myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
-								
-									JLabel loss = new JLabel("YOU LOST!", JLabel.CENTER);
-									loss.setForeground(Color.WHITE);
-									loss.setBackground(Color.RED);
-									loss.setOpaque(true);
-									loss.setSize(100, 50);
-									myPanel.add(loss);
-									myPanel.repaint();	
-									
-									for(int i=0; i<=8; i++){
-										for(int j=0; j<=8; j++){
-											if(myPanel.blockMines[i][j].equals(Color.BLACK)){
-												myPanel.colorArray[i][j]=newColor;
-											}
+
+								JLabel loss = new JLabel("YOU LOST!", JLabel.CENTER);
+								loss.setForeground(Color.WHITE);
+								loss.setBackground(Color.RED);
+								loss.setOpaque(true);
+								loss.setSize(100, 50);
+								myPanel.add(loss);
+								myPanel.repaint();	
+
+								for(int i=0; i<=8; i++){
+									for(int j=0; j<=8; j++){
+										if(myPanel.blockMines[i][j].equals(Color.BLACK)){
+											myPanel.colorArray[i][j]=newColor;
 										}
 									}
+								}
 							}
 							else {
 								uncoverSquares(myPanel, myFrame, myPanel.mouseDownGridX, myPanel.mouseDownGridY);
@@ -238,7 +248,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 				//Had pressed outside
 				//Do nothing
-				
+
 			} else {
 				if ((gridX == -1) || (gridY == -1)) {
 					//Is releasing outside
@@ -248,7 +258,7 @@ public class MyMouseAdapter extends MouseAdapter {
 						//Released the mouse button on a different cell where it was pressed
 						//Do nothing
 					} else {
-						
+
 						//Released the mouse button on the same cell where it was pressed
 						//On the grid other than on the left column and on the top row:
 						if(myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.GRAY)){
@@ -257,7 +267,7 @@ public class MyMouseAdapter extends MouseAdapter {
 							myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY] = newColor;
 							myPanel.repaint();
 							if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.BLACK)){
-							redSquares++;
+								redSquares++;
 							}
 							System.out.println(redSquares + " "+ myPanel.minesPlaced);
 						}
@@ -270,14 +280,13 @@ public class MyMouseAdapter extends MouseAdapter {
 							}
 						}	
 						if(redSquares==myPanel.minesPlaced){
-						JLabel won = new JLabel("YOU WON!", JLabel.CENTER);
-						won.setForeground(Color.GREEN);
-						won.setBackground(Color.GRAY);
-						won.setOpaque(true);
-						won.setSize(100, 50);
-						myPanel.add(won);
-						myPanel.repaint();
-						
+							won.setForeground(Color.GREEN);
+							won.setBackground(Color.GRAY);
+							won.setOpaque(true);
+							won.setSize(100, 50);
+							myPanel.add(won);
+							myPanel.repaint();
+
 						}
 					}
 				}
@@ -288,7 +297,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
-	
+
 	}
 
 }
