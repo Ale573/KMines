@@ -20,6 +20,7 @@ public class MyMouseAdapter extends MouseAdapter {
 
 		switch (mines){
 		case 0:
+			label1.setForeground(Color.WHITE);
 			break;
 		case 1:
 			label1.setForeground(Color.BLUE);
@@ -213,9 +214,15 @@ public class MyMouseAdapter extends MouseAdapter {
 
 								for(int i=0; i<=8; i++){
 									for(int j=0; j<=8; j++){
+										if(myPanel.blockMines[i][j].equals(Color.WHITE)){
+											//TODO
+											myPanel.colorArray[i][j]=Color.WHITE;
+											paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
+										}
 										if(myPanel.blockMines[i][j].equals(Color.BLACK)){
 											myPanel.colorArray[i][j]=newColor;
 										}
+										
 									}
 								}
 							}
