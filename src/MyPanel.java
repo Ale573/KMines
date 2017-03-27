@@ -3,6 +3,7 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class MyPanel extends JPanel {
@@ -39,8 +40,10 @@ public class MyPanel extends JPanel {
 			}
 		}
 		setMines();
+		add(Main.restart);
+		
 	}
-
+	
 	public void setMines(){
 		Random number = new Random();
 

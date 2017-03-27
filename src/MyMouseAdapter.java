@@ -6,10 +6,11 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JButton;
 
 public class MyMouseAdapter extends MouseAdapter {
 	int redSquares=0;
-
+	
 	public void paintNumbers(MyPanel myPanel, JFrame myFrame, int x, int y, int mines){
 		JLabel label1= new JLabel();
 		//sets label to square touched
@@ -177,6 +178,7 @@ public class MyMouseAdapter extends MouseAdapter {
 				if ((gridX == -1) || (gridY == -1)) {
 					//Is releasing outside
 					//Do nothing
+					
 				} else {
 					if ((myPanel.mouseDownGridX != gridX) || (myPanel.mouseDownGridY != gridY)) {
 						//Released the mouse button on a different cell where it was pressed
@@ -238,6 +240,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			if ((myPanel.mouseDownGridX == -1) || (myPanel.mouseDownGridY == -1)) {
 				//Had pressed outside
 				//Do nothing
+				
 			} else {
 				if ((gridX == -1) || (gridY == -1)) {
 					//Is releasing outside
@@ -276,8 +279,6 @@ public class MyMouseAdapter extends MouseAdapter {
 						won.setSize(100, 50);
 						myPanel.add(won);
 						myPanel.repaint();
-						myFrame.add(myPanel);
-						myPanel.repaint();
 						
 						}
 					}
@@ -289,6 +290,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			//Do nothing
 			break;
 		}
+	
 	}
 
 }
