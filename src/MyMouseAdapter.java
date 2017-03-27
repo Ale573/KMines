@@ -40,7 +40,6 @@ public class MyMouseAdapter extends MouseAdapter {
 		myPanel.repaint();
 		myFrame.add(myPanel);
 		myFrame.repaint();
-		System.out.println(mines);
 	}
 
 	public void uncoverSquares(MyPanel myPanel, JFrame myFrame, int x, int y) {
@@ -66,7 +65,6 @@ public class MyMouseAdapter extends MouseAdapter {
 					paintNumbers(myPanel, myFrame, x, y, minesNear(myPanel, x, y));
 				}
 			}
-			System.out.println("White squares " + whiteSquares);
 			if(whiteSquares == 71){
 				for(int i=0; i<=8; i++){
 					for(int j=0; j<=8; j++){
@@ -75,7 +73,6 @@ public class MyMouseAdapter extends MouseAdapter {
 						}
 						else if(myPanel.blockMines[i][j].equals(Color.WHITE)){
 							myPanel.colorArray[i][j]=Color.WHITE;
-							//TODO
 							paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
 						}
 					}
@@ -118,7 +115,6 @@ public class MyMouseAdapter extends MouseAdapter {
 		if(x!=8 && y!=0 && myPanel.blockMines[x + 1][y - 1].equals(Color.BLACK)){
 			mines += 1;
 		}	
-		System.out.println(mines);
 		return mines;
 	}
 
@@ -292,7 +288,6 @@ public class MyMouseAdapter extends MouseAdapter {
 							if(myPanel.blockMines[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.BLACK)){
 								redSquares++;
 							}
-							System.out.println(redSquares + " "+ myPanel.minesPlaced);
 						}
 						else if (myPanel.colorArray[myPanel.mouseDownGridX][myPanel.mouseDownGridY].equals(Color.RED)){
 							newColor = Color.GRAY;
@@ -313,8 +308,10 @@ public class MyMouseAdapter extends MouseAdapter {
 								for(int j=0; j<=8; j++){
 									if(myPanel.blockMines[i][j].equals(Color.WHITE)){
 										myPanel.colorArray[i][j]=Color.WHITE;
-										//TODO
 										paintNumbers(myPanel, myFrame, i, j, minesNear(myPanel, i, j));
+									}
+									else if(myPanel.blockMines[i][j].equals(Color.BLACK)){
+										myPanel.colorArray[i][j]=Color.BLACK;
 									}
 								}
 							}

@@ -14,7 +14,7 @@ public abstract class Main implements WindowListener, ActionListener{
 		
 	
 	public static void main(String[] args) {
-		myFrame = new JFrame("Color Grid");
+		myFrame = new JFrame("A Mines- by Amy Ayala and Alejandro Matos");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
 		myFrame.setSize(400, 400);
