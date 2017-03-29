@@ -35,8 +35,9 @@ public abstract class Main implements WindowListener, ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				
 				myFrame.getContentPane().removeAll();
-				myFrame.add(new MyPanel());
-				myFrame.revalidate();
+				MyPanel myPanel = new MyPanel();
+				myFrame.add(myPanel);
+			    myFrame.revalidate();
 			}
 		});
 

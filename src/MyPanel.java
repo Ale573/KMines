@@ -43,6 +43,8 @@ public class MyPanel extends JPanel {
 		
 	}
 	
+
+	
 	public void setMines(){
 		Random number = new Random();
 
