@@ -11,9 +11,8 @@ public abstract class Main implements WindowListener, ActionListener{
 	public static JButton restart = new JButton("Restart");
 	public static JFrame myFrame;
 	
-		
-	
 	public static void main(String[] args) {
+		
 		myFrame = new JFrame("A Mines- by Amy Ayala and Alejandro Matos");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
@@ -34,8 +33,10 @@ public abstract class Main implements WindowListener, ActionListener{
 		restart.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				myFrame.dispose();
-				main(new String[]{});
+				
+				myFrame.getContentPane().removeAll();
+				myFrame.add(new MyPanel());
+				myFrame.revalidate();
 			}
 		});
 
