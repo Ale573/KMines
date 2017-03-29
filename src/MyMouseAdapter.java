@@ -78,7 +78,6 @@ public class MyMouseAdapter extends MouseAdapter {
 					}
 				}
 
-
 				won.setForeground(Color.GREEN);
 				won.setBackground(Color.GRAY);
 				won.setOpaque(true);

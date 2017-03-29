@@ -7,12 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 public abstract class Main implements WindowListener, ActionListener{	
-	
+
 	public static JButton restart = new JButton("Restart");
 	public static JFrame myFrame;
-	
+
 	public static void main(String[] args) {
-		
+
 		myFrame = new JFrame("A Mines- by Amy Ayala and Alejandro Matos");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
@@ -27,21 +27,19 @@ public abstract class Main implements WindowListener, ActionListener{
 		restart.setBackground(Color.WHITE);
 		restart.setOpaque(true);		
 		restart.setBounds(180, 200, 40, 20);
-		
-		
 
 		restart.addActionListener(new ActionListener(){
-			@Override
+
 			public void actionPerformed(ActionEvent e) {
-				
+
 				myFrame.getContentPane().removeAll();
 				MyPanel myPanel = new MyPanel();
 				myFrame.add(myPanel);
-			    myFrame.revalidate();
+				myFrame.revalidate();
 			}
 		});
 
 		myFrame.setVisible(true);
 
-}
+	}
 }
