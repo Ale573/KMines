@@ -29,13 +29,13 @@ public abstract class Main implements WindowListener, ActionListener{
 		restart.setOpaque(true);		
 		restart.setBounds(180, 200, 40, 20);
 		
-		
-
 		restart.addActionListener(new ActionListener(){
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
-				myFrame.dispose();
-				main(new String[]{});
+				myFrame.getContentPane().removeAll();
+				MyPanel myPanel = new MyPanel();
+				myFrame.add(myPanel);
+				myFrame.revalidate();
 			}
 		});
 
